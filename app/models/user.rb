@@ -19,17 +19,15 @@ class User < ActiveRecord::Base
   end
 
   def love
-    new_fortune = Fortune.all.sample
-    puts "Does your future hold a passionate romance?...#{new_fortune.quote}"
-    Diary.create(user_id: self.id, fortune_id: new_fortune.id)
+    "Does your future hold a passionate romance?... #{Fortune.all.sample.quote}"
   end
 
   def wealth
-    puts "Wealth and riches are forthcoming...#{Fortune.all.sample.quote}"
+    "Wealth and riches are forthcoming... #{Fortune.all.sample.quote}"
   end
 
   def career
-    puts "Yes, many have questions about their career...#{Fortune.all.sample.quote}"
+    "Yes, many have questions about their career... #{Fortune.all.sample.quote}"
   end
 
   def saved_love
