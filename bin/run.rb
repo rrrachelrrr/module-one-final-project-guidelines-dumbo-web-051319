@@ -137,13 +137,25 @@ end
 
 
 new_page
-delete_choice = prompt.select("DO WANT TO FORGET THIS VISION OF THE FUTURE?", %w(YES, NO))
+hodor_choice = prompt.select("DO YOU DISLIKE THIS VISION OF THE FUTURE?", %w(YES NO))
 sleep(1)
 puts`clear`
 
-if delete_choice =="YES"
-  current_user.destroy_last
+if hodor_choice == "YES"
+  last_fortune = current_user.fortunes.last
+  last_fortune.update(quote: "Your new future is bleak... all I see is HODOR HODOR HODOR")
+  puts last_fortune.quote
 end
+
+new_page
+delete_choice = prompt.select("DO WANT TO FORGET THIS TERRIBLE NEW VISION OF THE FUTURE?", %w(YES NO))
+sleep(1)
+puts`clear`
+
+if delete_choice == "YES"
+  current_user.fortunes.last.destroy
+end
+
 
 # page_twelve
 UserInterface.background_art
@@ -157,3 +169,10 @@ all_fort = prompt.select("WOULD YOU LIKE TO SEE ALL OF YOUR FORTUNES?", %w(YES N
 if all_fort == "YES"
   puts current_user.fortune_quotes
 end
+#
+# new_page
+# all_fort = prompt.select("WOULD YOU LIKE ANOTHER GLIMPSE INTO THE FUTURE?", %w(YES NO))
+#
+# if all_fort == "YES"
+#   puts current_user.fortune_quotes
+# end

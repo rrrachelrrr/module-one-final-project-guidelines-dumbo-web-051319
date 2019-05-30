@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
     self.fortune_quotes.count
   end
 
+  def create_new_diary
+    Diary.create(user_id: self.id, fortune_id: Fortune.all.sample.id)
+  end
+
   def destroy_last
     self.fortunes.last.destroy
   end
@@ -23,14 +27,14 @@ class User < ActiveRecord::Base
 
   def wealth
     new_fortune = Fortune.all.sample
-    puts "Wealth and riches are forthcoming... #{new_fortune}"
+    puts "Wealth and riches are forthcoming... #{new_fortune.quote}"
     new_fortune.update(fortune_type: "wealth")
     Diary.create(user_id: self.id, fortune_id: new_fortune.id)
   end
 
   def career
     new_fortune = Fortune.all.sample
-    puts "Yes, many have questions about their career... #{new_fortune}"
+    puts "Yes, many have questions about their career... #{new_fortune.quote}"
     new_fortune.update(fortune_type: "career")
     Diary.create(user_id: self.id, fortune_id: new_fortune.id)
   end
