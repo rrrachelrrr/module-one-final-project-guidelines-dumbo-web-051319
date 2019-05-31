@@ -1,24 +1,12 @@
 require_relative '../config/environment'
 prompt = TTY::Prompt.new
-@current_user = nil
+
 
 def new_page
   3.times do puts""
   end
 end
 
-# def choose_fortune(user_choices)
-#   user_choices.each do |choice|
-#     if choice == "Love"
-#       User.love
-#     elsif
-#       choice == "Wealth"
-#       User.wealth
-#     else
-#       User.career
-#     end
-#   end
-# end
 
 # teaser_page
 new_page
@@ -31,7 +19,6 @@ if User.find_by(name: name) && User.find_by(password: password)
 else
 current_user = User.create(name: name, password: password)
 end
-
 sleep(1)
 puts`clear`
 
@@ -104,9 +91,7 @@ puts`clear`
 
 new_page
 choices = %w(Love Wealth Career)
-
 user_choice = prompt.select("SELECT YOUR FORTUNE", choices)
-# choose_fortune(user_choices)
 sleep(1)
 puts`clear`
 
@@ -119,9 +104,17 @@ sleep(2)
 puts`clear`
 
 # page_eleven
+
 new_page
+if user_choice == "Love"
+current_user.love
+elsif user_choice == "Wealth"
+current_user.wealth
+elsif user_choice == "Career"
+current_user.career
+end
 UserInterface.background_art
-sleep(2)
+sleep(4)
 puts`clear`
 
 # page_twelve
